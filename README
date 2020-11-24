@@ -1,0 +1,32 @@
+Project ISA 2019/2020
+Variant : Whois tazatel
+Author : Samuel Stuchly 
+Login : xstuch06 
+
+Program will take IP/hostname in option 'q' and IP/hostname of Whois server in option 'w',will query a whois server specified by option 'w' and will display information about IP/hostname specified in option 'q', obtained through Whois.
+
+Program takes 3 arguments :     -q <IP|hostname>, compulsory argument
+    				-w <IP|hostname of WHOIS server>, which will be queried, compulsory argument
+    				-d <IP>, DNS server which will be queried, optional argument, implicitely DNS resolver in OS will be used
+Note to argument 'd' : Feature of arguemnt d is not implemented. Parsing of 'd' argument is working though, so it will only accept valid IPv4 and IPv6 addresses, otherwise display an error. 
+
+Limitations:	- Known Bug: If option 'w' is an IP address not of a whois server, program will still connect to the address and stay connected until interupted.
+			     Therefore make sure to input IP address of a whois server. In case incorrect whois server hostname was input, program will display and error and help messeges.
+		- No DNS feature: As mentioned before the DNS part of the project, which is also described as Bonus part, was not implemented in the program, therefore no DNS info will be output.
+		- Whois Servers : - Most whois servers seem to be outputing data in the similar format. Not all of them though. 
+				  This program was tested, will display data from servers : whois.ripe.net , whois.iana.org, whois.nic.cz and ones with similar output format.
+				  During testing on whois.arin.net, answer is registered but in some cases will not display information provided by whois.arin.net because of its unusual format. 
+				  To display the entire answer from whois server : Uncomment 'puts()' function on line 332 in file isa-tazatel.cpp .
+			 	  Also discovered during testing: In case of whois.arin.net sometimes the answer arrives empty. I believe this is an issue of the server not the program.
+
+Compile program with command 'make' in the directory with source file and Makefile.
+Then run the program in format : ./isa-tazatel -q <IP|hostname> -w <IP|hostname of WHOIS server> [-d <IP|hostname>]
+
+Examples :	./isa-tazatel -q www.fit.vutbr.cz  -w whois.ripe.net -d 2001:4860:4860::8844
+		./isa-tazatel -q seznam.cz -w 217.31.205.42
+		./isa-tazatel -q 99.85.128.0 -w whois.arin.net
+
+Project files : 	isa-tazatel.cpp
+			Makefile
+			README
+			manual.pdf	
